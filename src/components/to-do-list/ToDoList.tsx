@@ -2,11 +2,14 @@ import React from 'react';
 
 import ToDo from '../../models/toDo';
 
+import ToDoItem from '../to-do-item/ToDoItem';
+
 const ToDoList: React.FC<{ items: ToDo[] }> = (props) => {
   return (
     <ul>
       {props.items.map((item) => (
-        <li key={item.id}>{item.text}</li>
+        //
+        <ToDoItem key={item.id} text={item.text} />
       ))}
     </ul>
   );
