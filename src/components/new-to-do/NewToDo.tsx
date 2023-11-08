@@ -1,8 +1,12 @@
-import { useRef } from 'react';
+import { useRef, useContext } from 'react';
+
+import { ToDosContext } from '../../state/to-dos-context';
 
 import classes from './NewToDo.module.css';
 
-const NewToDo: React.FC<{ onAddToDo: (input: string) => void }> = (props) => {
+const NewToDo: React.FC = () => {
+  const toDosContext = useContext(ToDosContext);
+
   const toDoInputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -15,7 +19,7 @@ const NewToDo: React.FC<{ onAddToDo: (input: string) => void }> = (props) => {
       return;
     }
 
-    props.onAddToDo(enteredInput);
+    toDosContext.addToDo(enteredInput);
   };
 
   return (

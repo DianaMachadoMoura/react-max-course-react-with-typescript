@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import ToDo from '../../models/toDo';
+import { ToDosContext } from '../../state/to-dos-context';
+
 import ToDoItem from '../to-do-item/ToDoItem';
+
 import classes from './ToDoList.module.css';
 
-const ToDoList: React.FC<{
-  items: ToDo[];
-  handleRemove: (toDoId: string) => void;
-}> = ({ items, handleRemove }) => {
+const ToDoList: React.FC = () => {
+  const toDosContext = useContext(ToDosContext);
+
   return (
     <ul className={classes.list}>
-      {items.map((item) => (
+      {toDosContext.toDoList.map((toDo) => (
         <ToDoItem
-          key={item.id}
-          text={item.text}
-          handleRemove={handleRemove.bind(null, item.id)}
+          key={toDo.id}
+          text={toDo.text}
+          handleRemove={toDosContext.removeToDo.bind(null, toDo.id)}
         />
       ))}
     </ul>
